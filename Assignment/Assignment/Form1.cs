@@ -44,7 +44,7 @@ namespace Assignment
                     for (i = 0; i < 5000; i++)
                     {
                         arNames[i] = sReader.ReadLine();
-                    Array.Sort(arNames);
+                    
                         lbNames.Items.Add(arNames[i]);
                         
                     }
