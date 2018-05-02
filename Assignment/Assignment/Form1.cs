@@ -16,45 +16,45 @@ namespace Assignment
         {
             InitializeComponent();
         }
+        // Constant path to my names csv file
         const string txtPath1 = "Names.csv";
         // Variables
         static string[] arNames = new string[5000];
         StreamReader sReader = File.OpenText(txtPath1);
         int i;
-        DateTime start = DateTime.Now;
-        DateTime Finish;
-        TimeSpan Time;
+       
 
 
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            // Closes application
+            Exit();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
+        
 
         public void loadFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            // Variables for time
+            DateTime start = DateTime.Now;
+            DateTime Finish;
+            TimeSpan Time;
             try
             {
 
-                
+                lblTime.Text = "";
                 // Declaration of Variables
                 // Contains the path for the stream reader
-               
-                
+
+
                 // Stream Reader to read the text files
-               
+
 
 
                 // Variables
 
-                
+
                 i = 0;
 
                 // Increment my i variable
@@ -70,14 +70,20 @@ namespace Assignment
 
                 Finish = DateTime.Now;
                 Time = Finish - start;
-                lblTime.Text = lbNames.Items.Count.ToString() + " " + "Results Loaded in" + " " + (Time.ToString());
+                sortResultsToolStripMenuItem.Enabled = true;
+                exportFileToolStripMenuItem.Enabled = true;
+                loadFileToolStripMenuItem.Enabled = false;
+                tbInput.Visible = true;
+                lblName.Visible = true;
+                btnPop.Visible = true;
+                lblTime.Text = lbNames.Items.Count.ToString() + " " + "Results Loaded in" + " " + (Time.TotalSeconds.ToString()) + " " + "seconds";
             }
 
-            catch (Exception)
+            catch 
             {
 
-
-                throw;
+                MessageBox.Show("Error..");
+                
             }
 
 
@@ -87,45 +93,69 @@ namespace Assignment
 
         private void exportFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Contains the path for the stream writer
-            string txtPath2 = "NewNames.csv";
-            // Stream Writer to write the text files
-            StreamWriter sWriter = new StreamWriter(txtPath2);
-            // Writes the sorted values into the new file
-            foreach (string name in lbNames.Items)
+            try
             {
-                sWriter.WriteLine(name.ToString());
-            }
+                DateTime start = DateTime.Now;
+                DateTime Finish;
+                TimeSpan Time;
+                lblTime.Text = "";
+                // Contains the path for the stream writer
+                string txtPath2 = "NewNames.csv";
+                // Stream Writer to write the text files
+                StreamWriter sWriter = new StreamWriter(txtPath2);
+                // Writes the sorted values into the new file
+                foreach (string name in lbNames.Items)
+                {
+                    sWriter.WriteLine(name.ToString());
+                }
 
+                Finish = DateTime.Now;
+                Time = Finish - start;
+                sortResultsToolStripMenuItem.Enabled = false;
+                exportFileToolStripMenuItem.Enabled = false;
+                restartToolStripMenuItem.Visible = true;
+                lblTime.Text = lbNames.Items.Count.ToString() + " " + "Results exported in" + " " + (Time.TotalSeconds.ToString()) + " " + "seconds";
+            }
+            catch
+            {
+                MessageBox.Show("Error...");
+                
+            }
         }
 
        public void SelectionSort(string[] arNames)
         {
-            int minIndex;
-            string minValue;
-            int startScan = 0;
-
-            for (startScan = 0; startScan < arNames.Length - 1; startScan++)
+            try
             {
-                minIndex = startScan;
-                minValue = arNames[startScan];
+                int minIndex;
+                string minValue;
+                int startScan = 0;
 
-
-
-
-                for (int index = startScan + 1; index < arNames.Length; index++)
+                for (startScan = 0; startScan < arNames.Length - 1; startScan++)
                 {
-                    if (string.Compare(minValue, arNames[index], true) == 1)
+                    minIndex = startScan;
+                    minValue = arNames[startScan];
+
+
+
+
+                    for (int index = startScan + 1; index < arNames.Length; index++)
                     {
-                        minValue = arNames[index];
-                        minIndex = index;
+                        if (string.Compare(minValue, arNames[index], true) == 1)
+                        {
+                            minValue = arNames[index];
+                            minIndex = index;
+                        }
                     }
+                    Swap(ref arNames[minIndex], ref arNames[startScan]);
                 }
-                Swap(ref arNames[minIndex], ref arNames[startScan]);
+
+
             }
-
-
-
+            catch
+            {
+                MessageBox.Show("Something went wrong in the sorting process...");
+            }
         }
 
        private void Swap(ref string a, ref string b)
@@ -136,30 +166,52 @@ namespace Assignment
 
         }
 
-       
+
 
         private void sortResultsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-
-            while (i < arNames.Length && !sReader.EndOfStream)
+            try
             {
-                arNames[i] = sReader.ReadLine();
-                i++;
-            }
-            lbNames.Items.Clear();
-            SelectionSort(arNames);
+                DateTime start = DateTime.Now;
+                DateTime Finish;
+                TimeSpan Time;
+                lblTime.Text = "";
+                while (i < arNames.Length && !sReader.EndOfStream)
+                {
+                    arNames[i] = sReader.ReadLine();
+                    i++;
+                }
+                lbNames.Items.Clear();
+                SelectionSort(arNames);
 
-            foreach (string name in arNames)
+                foreach (string name in arNames)
+                {
+                    lbNames.Items.Add(name);
+                }
+
+                Finish = DateTime.Now;
+                Time = Finish - start;
+                
+                lblTime.Text = lbNames.Items.Count.ToString() + " " + "Results Sorted in" + " " + (Time.TotalSeconds.ToString()) + " " + "seconds";
+            }
+            catch
             {
-                lbNames.Items.Add(name);
+                MessageBox.Show("Error...");
+            }
             }
 
-            Finish = DateTime.Now;
-            Time = Finish - start;
-            
-            lblTime.Text = lbNames.Items.Count.ToString() + " " + "Results Sorted in" + " " + (Time.TotalSeconds.ToString()) + " " + "seconds";
+        private void restartToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Restart();
         }
 
+        private void Restart()
+        {
+            Application.Restart();
+        }
+        private void Exit()
+        {
+            Application.Exit();
+        }
     }
 }

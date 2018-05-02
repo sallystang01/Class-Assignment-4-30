@@ -31,17 +31,18 @@
             this.lbNames = new System.Windows.Forms.ListBox();
             this.btnPop = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.tbInput = new System.Windows.Forms.TextBox();
+            this.lblName = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblTime = new System.Windows.Forms.Label();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.msTop = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sortResultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.restartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
+            this.msTop.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbNames
@@ -60,6 +61,7 @@
             this.btnPop.TabIndex = 1;
             this.btnPop.Text = "Search";
             this.btnPop.UseVisualStyleBackColor = true;
+            this.btnPop.Visible = false;
             // 
             // btnClose
             // 
@@ -71,21 +73,23 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // textBox1
+            // tbInput
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 57);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 4;
+            this.tbInput.Location = new System.Drawing.Point(12, 57);
+            this.tbInput.Name = "tbInput";
+            this.tbInput.Size = new System.Drawing.Size(100, 20);
+            this.tbInput.TabIndex = 4;
+            this.tbInput.Visible = false;
             // 
-            // label1
+            // lblName
             // 
-            this.label1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(13, 37);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(103, 17);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Enter a Name:";
+            this.lblName.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblName.Location = new System.Drawing.Point(13, 37);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(103, 17);
+            this.lblName.TabIndex = 6;
+            this.lblName.Text = "Enter a Name:";
+            this.lblName.Visible = false;
             // 
             // groupBox1
             // 
@@ -105,22 +109,23 @@
             this.lblTime.TabIndex = 8;
             this.lblTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // menuStrip1
+            // msTop
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.msTop.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(254, 24);
-            this.menuStrip1.TabIndex = 9;
-            this.menuStrip1.Text = "menuStrip1";
+            this.msTop.Location = new System.Drawing.Point(0, 0);
+            this.msTop.Name = "msTop";
+            this.msTop.Size = new System.Drawing.Size(254, 24);
+            this.msTop.TabIndex = 9;
+            this.msTop.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.loadFileToolStripMenuItem,
             this.sortResultsToolStripMenuItem,
-            this.exportFileToolStripMenuItem});
+            this.exportFileToolStripMenuItem,
+            this.restartToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "&File";
@@ -134,6 +139,7 @@
             // 
             // sortResultsToolStripMenuItem
             // 
+            this.sortResultsToolStripMenuItem.Enabled = false;
             this.sortResultsToolStripMenuItem.Name = "sortResultsToolStripMenuItem";
             this.sortResultsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.sortResultsToolStripMenuItem.Text = "&Sort Results";
@@ -141,10 +147,19 @@
             // 
             // exportFileToolStripMenuItem
             // 
+            this.exportFileToolStripMenuItem.Enabled = false;
             this.exportFileToolStripMenuItem.Name = "exportFileToolStripMenuItem";
             this.exportFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exportFileToolStripMenuItem.Text = "E&xport File";
             this.exportFileToolStripMenuItem.Click += new System.EventHandler(this.exportFileToolStripMenuItem_Click);
+            // 
+            // restartToolStripMenuItem
+            // 
+            this.restartToolStripMenuItem.Name = "restartToolStripMenuItem";
+            this.restartToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.restartToolStripMenuItem.Text = "&Restart";
+            this.restartToolStripMenuItem.Visible = false;
+            this.restartToolStripMenuItem.Click += new System.EventHandler(this.restartToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -152,19 +167,22 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(254, 348);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.lblName);
+            this.Controls.Add(this.tbInput);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnPop);
             this.Controls.Add(this.lbNames);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
+            this.Controls.Add(this.msTop);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.MainMenuStrip = this.msTop;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.msTop.ResumeLayout(false);
+            this.msTop.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -175,15 +193,16 @@
         private System.Windows.Forms.ListBox lbNames;
         private System.Windows.Forms.Button btnPop;
         private System.Windows.Forms.Button btnClose;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox tbInput;
+        private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label lblTime;
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip msTop;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sortResultsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportFileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem restartToolStripMenuItem;
     }
 }
 
