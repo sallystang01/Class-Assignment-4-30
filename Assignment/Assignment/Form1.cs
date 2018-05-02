@@ -42,7 +42,7 @@ namespace Assignment
             TimeSpan Time;
             try
             {
-
+                // Clears Text
                 lblTime.Text = "";
                 // Declaration of Variables
                 // Contains the path for the stream reader
@@ -67,21 +67,28 @@ namespace Assignment
                     lbNames.Items.Add(arNames[i]);
                     
                 }
+                // finish variable is the current time
 
                 Finish = DateTime.Now;
+
+                // Time lapse variable set
                 Time = Finish - start;
+
+                // Visual things that I like
                 sortResultsToolStripMenuItem.Enabled = true;
                 exportFileToolStripMenuItem.Enabled = true;
                 loadFileToolStripMenuItem.Enabled = false;
                 tbInput.Visible = true;
                 lblName.Visible = true;
                 btnPop.Visible = true;
+
+                // Requiremental time thingy
                 lblTime.Text = lbNames.Items.Count.ToString() + " " + "Results Loaded in" + " " + (Time.TotalSeconds.ToString()) + " " + "seconds";
             }
 
             catch 
             {
-
+                // if you're Sam, you will see this eventually
                 MessageBox.Show("Error..");
                 
             }
@@ -95,9 +102,12 @@ namespace Assignment
         {
             try
             {
+                // Time variables declared
                 DateTime start = DateTime.Now;
                 DateTime Finish;
                 TimeSpan Time;
+
+                // Clears text
                 lblTime.Text = "";
                 // Contains the path for the stream writer
                 string txtPath2 = "NewNames.csv";
@@ -106,60 +116,74 @@ namespace Assignment
                 // Writes the sorted values into the new file
                 foreach (string name in lbNames.Items)
                 {
+                    // Writes the items from the listbox into the csv file
                     sWriter.WriteLine(name.ToString());
                 }
-
+                // Sets time variables
                 Finish = DateTime.Now;
                 Time = Finish - start;
+
+                // Visuals
                 sortResultsToolStripMenuItem.Enabled = false;
                 exportFileToolStripMenuItem.Enabled = false;
                 restartToolStripMenuItem.Visible = true;
+
+                // time label
                 lblTime.Text = lbNames.Items.Count.ToString() + " " + "Results exported in" + " " + (Time.TotalSeconds.ToString()) + " " + "seconds";
             }
             catch
             {
+                // If you're Sam, you will see this eventually 
                 MessageBox.Show("Error...");
                 
             }
         }
 
-       public void SelectionSort(string[] arNames)
+        public void SelectionSort(string[] arNames)
         {
             try
             {
+                // Declares variables
                 int minIndex;
                 string minValue;
                 int startScan = 0;
 
+                // Starts scaning items in index
                 for (startScan = 0; startScan < arNames.Length - 1; startScan++)
                 {
                     minIndex = startScan;
                     minValue = arNames[startScan];
 
 
-
+                    // for items found in index, increment to the next value
 
                     for (int index = startScan + 1; index < arNames.Length; index++)
-                    {
+
+                        // if item found in index is less than next item found, move it to the other index
                         if (string.Compare(minValue, arNames[index], true) == 1)
                         {
                             minValue = arNames[index];
                             minIndex = index;
                         }
-                    }
-                    Swap(ref arNames[minIndex], ref arNames[startScan]);
                 }
+                // Swaps the two places
+                Swap(ref arNames[minIndex], ref arNames[startScan]);
+            
+            
 
 
             }
             catch
             {
+                // Sam might see this but it's unlikely
                 MessageBox.Show("Something went wrong in the sorting process...");
             }
         }
 
        private void Swap(ref string a, ref string b)
         {
+            // Nothing should go wrong here..
+            // Swaps the variables
             string temp = a;
             a = b;
             b = temp;
@@ -172,23 +196,31 @@ namespace Assignment
         {
             try
             {
+                // Time variables
                 DateTime start = DateTime.Now;
                 DateTime Finish;
                 TimeSpan Time;
+                // Clear
                 lblTime.Text = "";
+
+                // While the counter is less than the length of the erray / reader end
                 while (i < arNames.Length && !sReader.EndOfStream)
                 {
+                    // Puts the items in the text file into the erray
                     arNames[i] = sReader.ReadLine();
                     i++;
                 }
+                // Clears the list box
                 lbNames.Items.Clear();
+                // Sorts items in array
                 SelectionSort(arNames);
 
+                // Adds them to the list box
                 foreach (string name in arNames)
                 {
                     lbNames.Items.Add(name);
                 }
-
+                // Time stuff
                 Finish = DateTime.Now;
                 Time = Finish - start;
                 
@@ -196,17 +228,21 @@ namespace Assignment
             }
             catch
             {
+                // Sam will see this eventually
                 MessageBox.Show("Error...");
             }
             }
 
         private void restartToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // Restarts the application if you click the restart button
             Restart();
         }
 
+        //  I put this here to throw everyone off...
         private void Restart()
         {
+            
             Application.Restart();
         }
         private void Exit()
