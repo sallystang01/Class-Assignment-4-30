@@ -22,7 +22,7 @@ namespace Assignment
         static string[] arNames = new string[5000];
         StreamReader sReader = File.OpenText(txtPath1);
         int i;
-       
+
 
 
 
@@ -32,7 +32,7 @@ namespace Assignment
             Exit();
         }
 
-        
+
 
         public void loadFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -42,6 +42,8 @@ namespace Assignment
             TimeSpan Time;
             try
             {
+                regularSearchToolStripMenuItem.Enabled = true;
+                lblName.Text = "Enter an EXACT name then hit Enter:";
                 // Clears Text
                 lblTime.Text = "";
                 // Declaration of Variables
@@ -55,6 +57,7 @@ namespace Assignment
                 // Variables
 
 
+
                 i = 0;
 
                 // Increment my i variable
@@ -65,7 +68,7 @@ namespace Assignment
                     arNames[i] = sReader.ReadLine();
                     // adds the instance of i into the list box
                     lbNames.Items.Add(arNames[i]);
-                    
+
                 }
                 // finish variable is the current time
 
@@ -78,19 +81,19 @@ namespace Assignment
                 sortResultsToolStripMenuItem.Enabled = true;
                 exportFileToolStripMenuItem.Enabled = true;
                 loadFileToolStripMenuItem.Enabled = false;
-                tbInput.Visible = true;
-                lblName.Visible = true;
+                tbInput.Visible = false;
+
 
 
                 // Requiremental time thingy
                 lblTime.Text = lbNames.Items.Count.ToString() + " " + "Results Loaded in" + " " + (Time.TotalSeconds.ToString()) + " " + "seconds";
             }
 
-            catch 
+            catch
             {
                 // if you're Sam, you will see this eventually
                 MessageBox.Show("Error..");
-                
+
             }
 
 
@@ -126,7 +129,7 @@ namespace Assignment
                 // Visuals
                 sortResultsToolStripMenuItem.Enabled = false;
                 exportFileToolStripMenuItem.Enabled = false;
-                restartToolStripMenuItem.Visible = true;
+                
 
                 // time label
                 lblTime.Text = lbNames.Items.Count.ToString() + " " + "Results exported in" + " " + (Time.TotalSeconds.ToString()) + " " + "seconds";
@@ -135,7 +138,7 @@ namespace Assignment
             {
                 // If you're Sam, you will see this eventually 
                 MessageBox.Show("Error...");
-                
+
             }
         }
 
@@ -181,7 +184,7 @@ namespace Assignment
             }
         }
 
-       private void Swap(ref string a, ref string b)
+        private void Swap(ref string a, ref string b)
         {
             // Nothing should go wrong here..
             // Swaps the variables
@@ -224,9 +227,19 @@ namespace Assignment
                 // Time stuff
                 Finish = DateTime.Now;
                 Time = Finish - start;
-                tbInput.Visible = true;
-                lblName.Visible = true;
+                if (regularSearchToolStripMenuItem.Enabled == false)
+                {
+                    tbInputBin.Visible = false;
+                    tbInput.Visible = true;
+                }
+                else if (regularSearchToolStripMenuItem.Enabled == true)
+                {
+                    tbInputBin.Visible = true;
+                    tbInput.Visible = false;
+                }
                 
+                lblName.Visible = true;
+                sortResultsToolStripMenuItem.Enabled = false;   
                 lblTime.Text = lbNames.Items.Count.ToString() + " " + "Results Sorted in" + " " + (Time.TotalSeconds.ToString()) + " " + "seconds";
             }
             catch
@@ -234,7 +247,7 @@ namespace Assignment
                 // Sam will see this eventually
                 MessageBox.Show("Error...");
             }
-            }
+        }
 
         private void restartToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -245,12 +258,18 @@ namespace Assignment
         //  I put this here to throw everyone off...
         private void Restart()
         {
-            
+
             Application.Restart();
         }
         private void Exit()
         {
-            Application.Exit();
+            // Confirm that user really intends on exiting the application.
+            DialogResult dr = MessageBox.Show("Are you sure you want to exit?", "Exiting...", MessageBoxButtons.YesNo);
+
+            if (dr == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
         }
 
 
@@ -294,46 +313,7 @@ namespace Assignment
 
 
         }
-        private void btnPop_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                // Time variables
-                DateTime start = DateTime.Now;
-                DateTime Finish;
-                TimeSpan Time;
-                
-                // name = text in textbox
-                string Name = tbInput.Text;
-                // sets the position
-                int position = BinarySearch(arNames, tbInput.Text);
-                // boolean determining if name is in the array
-                bool Found = arNames.Contains(Name);
-                // If it was not found, display this message
-                if (Found == false)
-                {
-                    lblTime.Text = "This name could not be found";
-                }
-                // If found, do this
-                else
-                {
-                    // Time stuff
-                    Finish = DateTime.Now;
-                    Time = Finish - start;
-                    // Highlights the name
 
-                    lbNames.SetSelected(position, true);
-                    string text = lbNames.GetItemText(lbNames.SelectedItem);
-                    lblTime.Text = text + " " + "found in" + " " + (Time.TotalSeconds.ToString()) + " " + "seconds";
-                }
-            }
-            catch
-            {  // Sam did it
-                MessageBox.Show("You broke it");
-            }
-        }
-        // My Testing area (Trying to get it to find a result based on a latter typed)
-        // Idk even know where to start lol
         private void tbInput_TextChanged(object sender, EventArgs e)
         {
             try
@@ -359,6 +339,90 @@ namespace Assignment
             }
         }
 
-       
+        private void tbInputBin_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    // Time variables
+                    DateTime start = DateTime.Now;
+                    DateTime Finish;
+                    TimeSpan Time;
+
+                    // name = text in textbox
+                    string Name = tbInputBin.Text;
+                    // sets the position
+                    int position = BinarySearch(arNames, tbInputBin.Text);
+                    // boolean determining if name is in the array
+                    bool Found = arNames.Contains(Name);
+                    // If it was not found, display this message
+                    if (Found == false)
+                    {
+                        lblTime.Text = "This name could not be found";
+                    }
+                    // If found, do this
+                    else
+                    {
+                        // Time stuff
+                        Finish = DateTime.Now;
+                        Time = Finish - start;
+                        // Highlights the name
+
+                        lbNames.SetSelected(position, true);
+                        string text = lbNames.GetItemText(lbNames.SelectedItem);
+                        lblTime.Text = text + " " + "found in" + " " + (Time.TotalSeconds.ToString()) + " " + "seconds";
+                    }
+                }
+            }
+            catch
+            {  // Sam did it
+                MessageBox.Show("You broke it");
+            }
+        }
+
+
+            
+
+        
+    
+        private void binarySearchToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            binarySearchToolStripMenuItem.Enabled = false;
+            regularSearchToolStripMenuItem.Enabled = true;
+            
+            lblName.Text = "Enter an EXACT name then hit Enter:";
+
+            if (sortResultsToolStripMenuItem.Enabled == true)
+            {
+                tbInputBin.Visible = false;
+                lblName.Visible = false;
+                tbInput.Visible = false;
+            }
+            else if (sortResultsToolStripMenuItem.Enabled == false)
+            {
+                tbInputBin.Visible = true;
+                tbInput.Visible = true;
+            }
+        }
+
+        private void regularSearchToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            regularSearchToolStripMenuItem.Enabled = false;
+            binarySearchToolStripMenuItem.Enabled = true;
+            tbInputBin.Visible = false;
+            tbInput.Visible = true;
+            lblName.Visible = true;
+            lblName.Text = "Enter a name:";
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            regularSearchToolStripMenuItem.Enabled = false;
+            binarySearchToolStripMenuItem.Enabled = false;
+        }
+
+        
     }
 }
