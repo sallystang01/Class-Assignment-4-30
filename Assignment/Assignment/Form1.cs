@@ -42,6 +42,7 @@ namespace Assignment
             TimeSpan Time;
             try
             {
+                this.Size = new Size(300, 382);
                 regularSearchToolStripMenuItem.Enabled = true;
                 lblName.Text = "Enter an EXACT name then hit Enter:";
                 // Clears Text
@@ -423,6 +424,9 @@ namespace Assignment
             binarySearchToolStripMenuItem.Enabled = false;
         }
 
-        
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Exit();
+        }
     }
 }

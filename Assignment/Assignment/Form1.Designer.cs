@@ -45,6 +45,7 @@
             this.binarySearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.regularSearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tbInputBin = new System.Windows.Forms.TextBox();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.msTop.SuspendLayout();
             this.SuspendLayout();
@@ -131,7 +132,8 @@
             this.loadFileToolStripMenuItem,
             this.sortResultsToolStripMenuItem,
             this.exportFileToolStripMenuItem,
-            this.restartToolStripMenuItem});
+            this.restartToolStripMenuItem,
+            this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
             this.fileToolStripMenuItem.Text = "&File";
@@ -199,11 +201,18 @@
             this.tbInputBin.Visible = false;
             this.tbInputBin.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbInputBin_KeyDown);
             // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Text = "&Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 348);
+            this.ClientSize = new System.Drawing.Size(284, 56);
             this.Controls.Add(this.tbInputBin);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lblName);
@@ -213,11 +222,12 @@
             this.Controls.Add(this.msTop);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Location = new System.Drawing.Point(500, 150);
             this.MainMenuStrip = this.msTop;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form1";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Name Search";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
@@ -246,6 +256,7 @@
         private System.Windows.Forms.ToolStripMenuItem binarySearchToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem regularSearchToolStripMenuItem;
         private System.Windows.Forms.TextBox tbInputBin;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
     }
 }
 
