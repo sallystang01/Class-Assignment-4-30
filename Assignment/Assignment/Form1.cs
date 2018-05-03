@@ -78,9 +78,7 @@ namespace Assignment
                 sortResultsToolStripMenuItem.Enabled = true;
                 exportFileToolStripMenuItem.Enabled = true;
                 loadFileToolStripMenuItem.Enabled = false;
-                tbInput.Visible = true;
-                lblName.Visible = true;
-                btnPop.Visible = true;
+               
 
                 // Requiremental time thingy
                 lblTime.Text = lbNames.Items.Count.ToString() + " " + "Results Loaded in" + " " + (Time.TotalSeconds.ToString()) + " " + "seconds";
@@ -165,13 +163,14 @@ namespace Assignment
                             minValue = arNames[index];
                             minIndex = index;
                         }
+
+                    // Swaps the two places
+                    Swap(ref arNames[minIndex], ref arNames[startScan]);
+
+
+
+
                 }
-                // Swaps the two places
-                Swap(ref arNames[minIndex], ref arNames[startScan]);
-            
-            
-
-
             }
             catch
             {
@@ -223,7 +222,9 @@ namespace Assignment
                 // Time stuff
                 Finish = DateTime.Now;
                 Time = Finish - start;
-                
+                tbInput.Visible = true;
+                lblName.Visible = true;
+                btnPop.Visible = true;
                 lblTime.Text = lbNames.Items.Count.ToString() + " " + "Results Sorted in" + " " + (Time.TotalSeconds.ToString()) + " " + "seconds";
             }
             catch
@@ -249,5 +250,83 @@ namespace Assignment
         {
             Application.Exit();
         }
+
+
+        private int BinarySearch(string[] arName, string value)
+        {
+            int first = 0;                      // first array element
+            int last = arName.Length - 1;       // last array element
+            int middle;                         // Midpoint of search
+            int position = -1;                  // position of search value
+            bool found = false;                 // Flag
+
+            // Search for the value
+            while (!found && first <= last)
+            {
+                // Calc the midpoint.
+                middle = (first + last) / 2;
+
+                // If value is found at midpoint ...
+                if (arName[middle] == value)
+                {
+                    found = true;
+                    position = middle;
+                }
+
+                // else if value is in lower half...
+                else if (string.Compare(arName[middle], value, false) > 0)
+                {
+                    last = middle - 1;
+                }
+
+                // else if value is in upper half...
+                else
+                {
+                    first = middle + 1;
+                }
+            }
+            // Return the position of the item, or -1
+            // If it was not found.
+            return position;
+
+
+
+        }
+        private void btnPop_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Time variables
+                DateTime start = DateTime.Now;
+                DateTime Finish;
+                TimeSpan Time;
+                // name = text in textbox
+                string Name = tbInput.Text;
+                // sets the position
+                int position = BinarySearch(arNames, tbInput.Text);
+                // boolean determining if name is in the array
+                bool Found = arNames.Contains(Name);
+                // If it was not found, display this message
+                if (Found == false)
+                {
+                    lblTime.Text = "This name could not be found";
+                }
+                // If found, do this
+                else
+                {
+                    // Time stuff
+                    Finish = DateTime.Now;
+                    Time = Finish - start;
+                    // Highlights the name
+                    lbNames.SetSelected(position, true);
+                    lblTime.Text = "Results found in" + " " + (Time.TotalSeconds.ToString()) + " " + "seconds";
+                }
+            }
+            catch
+            {  // Sam did it
+                MessageBox.Show("You broke it");
+            }
+        }
+
     }
 }

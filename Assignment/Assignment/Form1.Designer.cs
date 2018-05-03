@@ -62,6 +62,7 @@
             this.btnPop.Text = "Search";
             this.btnPop.UseVisualStyleBackColor = true;
             this.btnPop.Visible = false;
+            this.btnPop.Click += new System.EventHandler(this.btnPop_Click);
             // 
             // btnClose
             // 
@@ -133,7 +134,7 @@
             // loadFileToolStripMenuItem
             // 
             this.loadFileToolStripMenuItem.Name = "loadFileToolStripMenuItem";
-            this.loadFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadFileToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.loadFileToolStripMenuItem.Text = "&Load File";
             this.loadFileToolStripMenuItem.Click += new System.EventHandler(this.loadFileToolStripMenuItem_Click);
             // 
@@ -141,7 +142,7 @@
             // 
             this.sortResultsToolStripMenuItem.Enabled = false;
             this.sortResultsToolStripMenuItem.Name = "sortResultsToolStripMenuItem";
-            this.sortResultsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sortResultsToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.sortResultsToolStripMenuItem.Text = "&Sort Results";
             this.sortResultsToolStripMenuItem.Click += new System.EventHandler(this.sortResultsToolStripMenuItem_Click);
             // 
@@ -149,14 +150,14 @@
             // 
             this.exportFileToolStripMenuItem.Enabled = false;
             this.exportFileToolStripMenuItem.Name = "exportFileToolStripMenuItem";
-            this.exportFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exportFileToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.exportFileToolStripMenuItem.Text = "E&xport File";
             this.exportFileToolStripMenuItem.Click += new System.EventHandler(this.exportFileToolStripMenuItem_Click);
             // 
             // restartToolStripMenuItem
             // 
             this.restartToolStripMenuItem.Name = "restartToolStripMenuItem";
-            this.restartToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.restartToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.restartToolStripMenuItem.Text = "&Restart";
             this.restartToolStripMenuItem.Visible = false;
             this.restartToolStripMenuItem.Click += new System.EventHandler(this.restartToolStripMenuItem_Click);
