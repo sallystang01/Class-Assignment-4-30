@@ -81,6 +81,7 @@
             this.tbInput.Size = new System.Drawing.Size(100, 20);
             this.tbInput.TabIndex = 4;
             this.tbInput.Visible = false;
+            this.tbInput.TextChanged += new System.EventHandler(this.tbInput_TextChanged);
             // 
             // lblName
             // 
@@ -180,7 +181,7 @@
             this.MinimizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "Name Search";
             this.groupBox1.ResumeLayout(false);
             this.msTop.ResumeLayout(false);
             this.msTop.PerformLayout();

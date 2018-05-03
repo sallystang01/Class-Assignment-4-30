@@ -300,6 +300,7 @@ namespace Assignment
                 DateTime start = DateTime.Now;
                 DateTime Finish;
                 TimeSpan Time;
+                
                 // name = text in textbox
                 string Name = tbInput.Text;
                 // sets the position
@@ -318,8 +319,10 @@ namespace Assignment
                     Finish = DateTime.Now;
                     Time = Finish - start;
                     // Highlights the name
+
                     lbNames.SetSelected(position, true);
-                    lblTime.Text = "Results found in" + " " + (Time.TotalSeconds.ToString()) + " " + "seconds";
+                    string text = lbNames.GetItemText(lbNames.SelectedItem);
+                    lblTime.Text = text + " " + "found in" + " " + (Time.TotalSeconds.ToString()) + " " + "seconds";
                 }
             }
             catch
@@ -327,6 +330,48 @@ namespace Assignment
                 MessageBox.Show("You broke it");
             }
         }
+        // My Testing area (Trying to get it to find a result based on a latter typed)
+        // Idk even know where to start lol
+        private void tbInput_TextChanged(object sender, EventArgs e)
+        {
+            //try
+            //{
+            //    // Time variables
+            //    DateTime start = DateTime.Now;
+            //    DateTime Finish;
+            //    TimeSpan Time;
 
+            //    // name = text in textbox
+            //    string Name = tbInput.Text;
+            //    // sets the position
+            //    int position = BinarySearch(arNames, tbInput.Text);
+            //    // boolean determining if name is in the array
+              
+             
+
+            //    // If it was not found, display this message
+            //    if (Found == false)
+            //    {
+            //        lblTime.Text = "This name could not be found";
+            //    }
+            //    // If found, do this
+            //    else
+            //    {
+                    
+            //        // Time stuff
+            //        Finish = DateTime.Now;
+            //        Time = Finish - start;
+            //        // Highlights the name
+
+            //        lbNames.SetSelected(position, true);
+            //        string text = lbNames.GetItemText(lbNames.SelectedItem);
+            //        lblTime.Text = text + " " + "found in" + " " + (Time.TotalSeconds.ToString()) + " " + "seconds";
+            //    }
+            //}
+            //catch
+            //{  // Sam did it
+            //    MessageBox.Show("You broke it");
+            //}
+        }
     }
 }
