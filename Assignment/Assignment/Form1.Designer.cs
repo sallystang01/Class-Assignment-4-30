@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.lbNames = new System.Windows.Forms.ListBox();
-            this.btnPop = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.tbInput = new System.Windows.Forms.TextBox();
             this.lblName = new System.Windows.Forms.Label();
@@ -53,17 +52,6 @@
             this.lbNames.Size = new System.Drawing.Size(231, 134);
             this.lbNames.TabIndex = 0;
             // 
-            // btnPop
-            // 
-            this.btnPop.Location = new System.Drawing.Point(118, 55);
-            this.btnPop.Name = "btnPop";
-            this.btnPop.Size = new System.Drawing.Size(75, 23);
-            this.btnPop.TabIndex = 1;
-            this.btnPop.Text = "Search";
-            this.btnPop.UseVisualStyleBackColor = true;
-            this.btnPop.Visible = false;
-            this.btnPop.Click += new System.EventHandler(this.btnPop_Click);
-            // 
             // btnClose
             // 
             this.btnClose.Location = new System.Drawing.Point(98, 311);
@@ -78,7 +66,7 @@
             // 
             this.tbInput.Location = new System.Drawing.Point(12, 57);
             this.tbInput.Name = "tbInput";
-            this.tbInput.Size = new System.Drawing.Size(100, 20);
+            this.tbInput.Size = new System.Drawing.Size(230, 20);
             this.tbInput.TabIndex = 4;
             this.tbInput.Visible = false;
             this.tbInput.TextChanged += new System.EventHandler(this.tbInput_TextChanged);
@@ -86,7 +74,7 @@
             // lblName
             // 
             this.lblName.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblName.Location = new System.Drawing.Point(13, 37);
+            this.lblName.Location = new System.Drawing.Point(77, 37);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(103, 17);
             this.lblName.TabIndex = 6;
@@ -172,7 +160,6 @@
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.tbInput);
             this.Controls.Add(this.btnClose);
-            this.Controls.Add(this.btnPop);
             this.Controls.Add(this.lbNames);
             this.Controls.Add(this.msTop);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -193,7 +180,6 @@
         #endregion
 
         private System.Windows.Forms.ListBox lbNames;
-        private System.Windows.Forms.Button btnPop;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.TextBox tbInput;
         private System.Windows.Forms.Label lblName;

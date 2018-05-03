@@ -78,7 +78,9 @@ namespace Assignment
                 sortResultsToolStripMenuItem.Enabled = true;
                 exportFileToolStripMenuItem.Enabled = true;
                 loadFileToolStripMenuItem.Enabled = false;
-               
+                tbInput.Visible = true;
+                lblName.Visible = true;
+
 
                 // Requiremental time thingy
                 lblTime.Text = lbNames.Items.Count.ToString() + " " + "Results Loaded in" + " " + (Time.TotalSeconds.ToString()) + " " + "seconds";
@@ -224,7 +226,7 @@ namespace Assignment
                 Time = Finish - start;
                 tbInput.Visible = true;
                 lblName.Visible = true;
-                btnPop.Visible = true;
+                
                 lblTime.Text = lbNames.Items.Count.ToString() + " " + "Results Sorted in" + " " + (Time.TotalSeconds.ToString()) + " " + "seconds";
             }
             catch
@@ -334,44 +336,29 @@ namespace Assignment
         // Idk even know where to start lol
         private void tbInput_TextChanged(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    // Time variables
-            //    DateTime start = DateTime.Now;
-            //    DateTime Finish;
-            //    TimeSpan Time;
+            try
+            {
+                // Time variables
+                DateTime start = DateTime.Now;
+                DateTime Finish;
+                TimeSpan Time;
+                string search = tbInput.Text;
+                // Clears list box and prepares it to show results
+                lbNames.Items.Clear();
+                // Searches for the item in the array that contains the text from text box
+                lbNames.Items.AddRange(arNames.Where(n => n.Contains(search)).ToArray());
+                //Time variables
+                Finish = DateTime.Now;
+                Time = Finish - start; string text = lbNames.GetItemText(lbNames.SelectedItem);
+                lblTime.Text = lbNames.Items.Count + " " + "found in" + " " + (Time.TotalSeconds.ToString()) + " " + "seconds";
 
-            //    // name = text in textbox
-            //    string Name = tbInput.Text;
-            //    // sets the position
-            //    int position = BinarySearch(arNames, tbInput.Text);
-            //    // boolean determining if name is in the array
-              
-             
-
-            //    // If it was not found, display this message
-            //    if (Found == false)
-            //    {
-            //        lblTime.Text = "This name could not be found";
-            //    }
-            //    // If found, do this
-            //    else
-            //    {
-                    
-            //        // Time stuff
-            //        Finish = DateTime.Now;
-            //        Time = Finish - start;
-            //        // Highlights the name
-
-            //        lbNames.SetSelected(position, true);
-            //        string text = lbNames.GetItemText(lbNames.SelectedItem);
-            //        lblTime.Text = text + " " + "found in" + " " + (Time.TotalSeconds.ToString()) + " " + "seconds";
-            //    }
-            //}
-            //catch
-            //{  // Sam did it
-            //    MessageBox.Show("You broke it");
-            //}
+            }
+            catch
+            {  // Sam did it
+                MessageBox.Show("You broke it");
+            }
         }
+
+       
     }
 }
