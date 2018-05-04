@@ -228,6 +228,8 @@ namespace Assignment
                 // Time stuff
                 Finish = DateTime.Now;
                 Time = Finish - start;
+
+                // Determines which text box should be visible depending on which mode is selected
                 if (regularSearchToolStripMenuItem.Enabled == false)
                 {
                     tbInputBin.Visible = false;
@@ -238,9 +240,10 @@ namespace Assignment
                     tbInputBin.Visible = true;
                     tbInput.Visible = false;
                 }
-                
+                // Shows the name label, allows the items to be sorted.
                 lblName.Visible = true;
                 sortResultsToolStripMenuItem.Enabled = false;   
+                // Displays the amount of time
                 lblTime.Text = lbNames.Items.Count.ToString() + " " + "Results Sorted in" + " " + (Time.TotalSeconds.ToString()) + " " + "seconds";
             }
             catch
@@ -389,11 +392,16 @@ namespace Assignment
     
         private void binarySearchToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // When you switch to binary search mode, it won't allow you to click the button again
             binarySearchToolStripMenuItem.Enabled = false;
             regularSearchToolStripMenuItem.Enabled = true;
-            
+            // Clears tbInput Text to reset the items to display all 5000 
+            tbInput.Text = "";
+
+            // Switches the text of the label
             lblName.Text = "Enter an EXACT name then hit Enter:";
 
+            // Conditional statements for appearance
             if (sortResultsToolStripMenuItem.Enabled == true)
             {
                 tbInputBin.Visible = false;
@@ -409,10 +417,15 @@ namespace Assignment
 
         private void regularSearchToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // Disables the ability to click the button again
             regularSearchToolStripMenuItem.Enabled = false;
             binarySearchToolStripMenuItem.Enabled = true;
+
+            // Hides the other text box and shows the new text box
             tbInputBin.Visible = false;
             tbInput.Visible = true;
+
+            // Appearance
             lblName.Visible = true;
             lblName.Text = "Enter a name:";
 
@@ -420,12 +433,14 @@ namespace Assignment
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // Default loading stuff that could have been changed directly in the designer but that's okay.
             regularSearchToolStripMenuItem.Enabled = false;
             binarySearchToolStripMenuItem.Enabled = false;
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // Exits application
             Exit();
         }
     }
