@@ -17,7 +17,7 @@ namespace Assignment
             InitializeComponent();
         }
         // Constant path to my names csv file
-        const string txtPath1 = "Names.csv";
+        const string txtPath1 = @"C:\Data\Class-Assignment-4-30\Assignment\Assignment\File\Names.csv";
         // Variables
         static string[] arNames = new string[5000];
         StreamReader sReader = File.OpenText(txtPath1);
